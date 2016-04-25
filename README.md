@@ -34,6 +34,7 @@ Credits:
 	- Movida Production
 	- #GGJ16 @ Orléans
 
+Original code can be visible in "party_version" branch.
 	
 The Entry url on GGJ website:
 http://globalgamejam.org/2016/games/tales-unemployed
