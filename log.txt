@@ -1,0 +1,1264 @@
+HuC (v3.21, 2005/04/09, Denki release)
+
+No errors
+PC Engine Assembler (v3.21, 2005/04/09, Denki Release)
+
+pass 1
+pass 2
+#[2]   startup.asm
+ 1243  00:E30B                    tma   #page(psgMainDrive)               ; map out whatever is in 'our' code segment
+       Undefined symbol in operand field!
+ 1243  00:E30B                    tma   #page(psgMainDrive)               ; map out whatever is in 'our' code segment
+       Incorrect page index!
+ 1245  00:E30C                    lda   #bank(psgMainDrive)               ; load 'our' page number
+       No BANK index for this symbol!
+ 1245  00:E30C                    lda   #bank(psgMainDrive)               ; load 'our' page number
+       Undefined symbol in operand field!
+ 1246  00:E310                    tam   #page(psgMainDrive)               ; and map it into memory
+       Undefined symbol in operand field!
+ 1246  00:E310                    tam   #page(psgMainDrive)               ; and map it into memory
+       Incorrect page index!
+ 1280  00:E32A                    jsr             psgMainDrive            ; do main tracks
+       Undefined symbol in operand field!
+ 1295  00:E343                    jsr     psgSubDrive                     ; handle sub track
+       Undefined symbol in operand field!
+ 1336  00:E36F                    tam   #page(psgMainDrive)       ; restore code bank
+       Undefined symbol in operand field!
+ 1336  00:E36F                    tam   #page(psgMainDrive)       ; restore code bank
+       Incorrect page index!
+#[3]   sound.asm
+  115  02:C017                    stz     psg_tempo       ; clear header info
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  122  02:C023                    stz     <psg_tmpptr
+       Undefined symbol in operand field!
+  123  02:C025                    stz     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  124  02:C027                    stz     <psg_tmpptr1
+       Undefined symbol in operand field!
+  125  02:C029                    stz     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  134  02:C031            .loop1: stx     psg_ch_value    ; $0800 register value
+       Undefined symbol in operand field!
+  153  02:C056                    sta     psg_song
+       Undefined symbol in operand field!
+  155  02:C059                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  156  02:C05B                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  170  02:C068                     stx    psg_bank1
+       Undefined symbol in operand field!
+  170  02:C06B                     sta    psg_bank1+1
+       Undefined symbol in operand field!
+  180  02:C073                     stx    psg_trkhdr
+       Undefined symbol in operand field!
+  180  02:C076                     sta    psg_trkhdr+1
+       Undefined symbol in operand field!
+  190  02:C07E                     stx    psg_wavehdr
+       Undefined symbol in operand field!
+  190  02:C081                     sta    psg_wavehdr+1
+       Undefined symbol in operand field!
+  200  02:C089                     stx    psg_envhdr
+       Undefined symbol in operand field!
+  200  02:C08C                     sta    psg_envhdr+1
+       Undefined symbol in operand field!
+  210  02:C094                     stx    psg_fmhdr
+       Undefined symbol in operand field!
+  210  02:C097                     sta    psg_fmhdr+1
+       Undefined symbol in operand field!
+  220  02:C09F                     stx    psg_pehdr
+       Undefined symbol in operand field!
+  220  02:C0A2                     sta    psg_pehdr+1
+       Undefined symbol in operand field!
+  230  02:C0AA                     stx    psg_percusshdr
+       Undefined symbol in operand field!
+  230  02:C0AD                     sta    psg_percusshdr+1
+       Undefined symbol in operand field!
+  246  02:C0BD                    sta     psg_tempo
+       Undefined symbol in operand field!
+  258  02:C0C3                    sta     psg_song
+       Undefined symbol in operand field!
+  273  02:C0CC            .loop:  ldx     psg_voicectrl,Y
+       Undefined symbol in operand field!
+  295  02:C0DE            .loop:  ldx     psg_voicectrl+6,Y
+       Undefined symbol in operand field!
+  317  02:C0F1                    lda     #PSG_MAINPAUSE  ; set pause on MAIN track
+       Undefined symbol in operand field!
+  318  02:C0F3                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  326  02:C0FA            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  334  02:C105                    stz     psg_voicectrl,X
+       Undefined symbol in operand field!
+  336  02:C108            .pause: lda     psg_voicectrl+6,X       ; check subtrack
+       Undefined symbol in operand field!
+  340  02:C10F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  374  02:C12F                    lda     #PSG_SUBPAUSE   ; set pause on SUB track
+       Undefined symbol in operand field!
+  375  02:C131                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  383  02:C138            .loop:  lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  391  02:C143                    stz     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  395  02:C14A                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  398  02:C14D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  401  02:C152                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  403  02:C157                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  406  02:C15A                    lda     psg_trkctrl     ; is anything playing on main track ?
+       Undefined symbol in operand field!
+  409  02:C15F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  442  02:C17D                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  443  02:C17F                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  446  02:C184            .loop:  stz     psg_voicectrl,X         ; disable main track
+       Undefined symbol in operand field!
+  447  02:C187                    stz     psg_voicectrl+6,X       ; disable sub track
+       Undefined symbol in operand field!
+  468  02:C19A                    ldy     psg_voicectrl,X
+       Undefined symbol in operand field!
+  473  02:C1A2                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  476  02:C1A6                    ldy     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  480  02:C1AD                    stx     psg_ch_value    ; turn off voice
+       Undefined symbol in operand field!
+  508  02:C1C4            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  512  02:C1CB                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  517  02:C1D1                    lda     #PSG_MAINPAUSE          ; release pause on main tracks
+       Undefined symbol in operand field!
+  518  02:C1D3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  524  02:C1DC            .loop1: lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  528  02:C1E3                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  530  02:C1E6                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  532  02:C1EB                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  537  02:C1F1                    lda     #PSG_SUBPAUSE           ; release pause on sub tracks
+       Undefined symbol in operand field!
+  538  02:C1F3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  556  02:C200                    sta     psg_fadespeed   ; store it as fade speed
+       Undefined symbol in operand field!
+  557  02:C203                    stz     psg_fadecount   ; reset fade levels
+       Undefined symbol in operand field!
+  558  02:C206                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  582  02:C20B                    lda     psg_song
+       Undefined symbol in operand field!
+  589  02:C215                    sta     psg_currvoice
+       Undefined symbol in operand field!
+  591  02:C218            .loop:  ldx     psg_currvoice
+       Undefined symbol in operand field!
+  596  02:C21F                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  597  02:C222                    and     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  602  02:C228                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  606  02:C22D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  611  02:C235            .next:  dec     psg_currvoice
+       Undefined symbol in operand field!
+  624  02:C247                    lda     #PSG_MAINPAUSE
+       Undefined symbol in operand field!
+  625  02:C249                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  632  02:C253                    lda     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  633  02:C255                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  646  02:C259                    lda     psg_song
+       Undefined symbol in operand field!
+  651  02:C25E                     ldx    psg_trkhdr
+       Undefined symbol in operand field!
+  651  02:C261                     lda    psg_trkhdr+1
+       Undefined symbol in operand field!
+  653  02:C264                     stx    <psg_tmpptr1
+       Undefined symbol in operand field!
+  653  02:C266                     sta    <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  654  02:C268                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  655  02:C26A                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  657  02:C26D                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  658  02:C26F                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  660  02:C271                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  661  02:C273                    sta     <psg_tmpptr1
+       Undefined symbol in operand field!
+  662  02:C275                    sta     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  672  02:C27F                    lsr     psg_tmpptr1+1
+       Undefined symbol in operand field!
+  676  02:C289                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  677  02:C28C                    sta     psg_cntdown,X
+       Undefined symbol in operand field!
+  678  02:C28F                    stz     psg_strikephase,X
+       Undefined symbol in operand field!
+  679  02:C292                    stz     psg_transpose,X
+       Undefined symbol in operand field!
+  680  02:C295                    stz     psg_mode,X
+       Undefined symbol in operand field!
+  681  02:C298                    stz     psg_stkoff,X
+       Undefined symbol in operand field!
+  682  02:C29B                    stz     psg_detune,X
+       Undefined symbol in operand field!
+  683  02:C29E                    stz     psg_duratnmult,X
+       Undefined symbol in operand field!
+  684  02:C2A1                    stz     psg_fmcorrect,X
+       Undefined symbol in operand field!
+  685  02:C2A4                    stz     psg_fmdelay,X
+       Undefined symbol in operand field!
+  686  02:C2A7                    stz     psg_fmdelcntdn,X
+       Undefined symbol in operand field!
+  687  02:C2AA                    stz     psg_pedelay,X
+       Undefined symbol in operand field!
+  688  02:C2AD                    stz     psg_pedelcntdn,X
+       Undefined symbol in operand field!
+  689  02:C2B0                    stz     psg_volchg,X
+       Undefined symbol in operand field!
+  690  02:C2B3                    stz     psg_volchgaccum,X
+       Undefined symbol in operand field!
+  691  02:C2B6                    stz     psg_panpotchg,X
+       Undefined symbol in operand field!
+  692  02:C2B9                    stz     psg_panpotaccum,X
+       Undefined symbol in operand field!
+  695  02:C2BE                    sta     psg_octave,X
+       Undefined symbol in operand field!
+  697  02:C2C3                    sta     psg_keyonratio,X
+       Undefined symbol in operand field!
+  698  02:C2C6                    sta     psg_keycntdown,X
+       Undefined symbol in operand field!
+  700  02:C2CB                    sta     psg_perchvol,X
+       Undefined symbol in operand field!
+  703  02:C2D1                    sta     psg_envptr_l,X
+       Undefined symbol in operand field!
+  705  02:C2D7                    sta     psg_envptr_h,X
+       Undefined symbol in operand field!
+  706  02:C2DA                    stz     psg_envptr_off,X
+       Undefined symbol in operand field!
+  708  02:C2DF                    stz     psg_envrels_l,X
+       Undefined symbol in operand field!
+  709  02:C2E2                    sta     psg_envrels_h,X
+       Undefined symbol in operand field!
+  712  02:C2E6                    lda     [psg_tmpptr],Y  ; put voice address into correct voice
+       Undefined symbol in operand field!
+  713  02:C2E8                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  714  02:C2EB                    sta     psg_savepoint_l,X
+       Undefined symbol in operand field!
+  716  02:C2EF                    lda     [psg_tmpptr],Y
+       Undefined symbol in operand field!
+  717  02:C2F1                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  718  02:C2F4                    sta     psg_savepoint_h,X
+       Undefined symbol in operand field!
+  722  02:C2F8                    lda     <psg_tmpptr1
+       Undefined symbol in operand field!
+  735  02:C30C                    stz     psg_fadespeed
+       Undefined symbol in operand field!
+  736  02:C30F                    stz     psg_fadecount
+       Undefined symbol in operand field!
+  737  02:C312                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  739  02:C315                    lda     psg_song
+       Undefined symbol in operand field!
+  741  02:C31A                    sta     psg_song
+       Undefined symbol in operand field!
+  786  02:C330                    dec     psg_cntdown,X   ; is last note done yet ?
+       Undefined symbol in operand field!
+  790  02:C336            .next:  lda     psg_trkptr_l,X  ; get pointer
+       Undefined symbol in operand field!
+  791  02:C339                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  792  02:C33B                    lda     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  793  02:C33E                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  795  02:C340                    lda     [psg_tmpptr]    ; read next bytecode
+       Undefined symbol in operand field!
+  796  02:C342                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  796  02:C346                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  822  02:C35E                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  823  02:C361                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+  824  02:C363                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  825  02:C366                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  826  02:C368                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  891  02:C3D4                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  891  02:C3D8                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  899  02:C3DB                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  901  02:C3DF                    sta     psg_duratnmult,Y
+       Undefined symbol in operand field!
+  909  02:C3E7                    sta     psg_octave,Y
+       Undefined symbol in operand field!
+  916  02:C3EB                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  917  02:C3EE                    inc     psg_octave,X
+       Undefined symbol in operand field!
+  924  02:C3F2                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  925  02:C3F5                    dec     psg_octave,X
+       Undefined symbol in operand field!
+  933  02:C3FB                    sta     psg_strikephase,Y
+       Undefined symbol in operand field!
+  940  02:C3FF                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  946  02:C40B                    sta     psg_tempo
+       Undefined symbol in operand field!
+  953  02:C411                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  954  02:C413                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  956  02:C417                    sta     psg_volchg,Y
+       Undefined symbol in operand field!
+  957  02:C41A                    sta     psg_volchgaccum,Y
+       Undefined symbol in operand field!
+  964  02:C420                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  965  02:C422                    sta     psg_panpot,Y
+       Undefined symbol in operand field!
+  967  02:C426                    sta     psg_panpotchg,Y
+       Undefined symbol in operand field!
+  968  02:C429                    sta     psg_panpotaccum,Y
+       Undefined symbol in operand field!
+  976  02:C432                     sbc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  977  02:C434                    sta     psg_keyonratio,Y
+       Undefined symbol in operand field!
+  984  02:C43A                    lda     psg_perchvol,Y
+       Undefined symbol in operand field!
+  985  02:C43E                     adc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  987  02:C442                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  994  02:C448                    lda     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+  995  02:C44B                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  996  02:C44D                    lda     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+  997  02:C450                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1004  02:C453                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+ 1005  02:C455                    sta     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+ 1006  02:C458                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1007  02:C45A                    sta     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+ 1026  02:C460                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1027  02:C462                    sta     psg_wavenum,Y
+       Undefined symbol in operand field!
+ 1070  02:C46E                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1071  02:C470                    sta     psg_detune,Y
+       Undefined symbol in operand field!
+ 1090  02:C478                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1092  02:C47B                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+ 1092  02:C47F                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1093  02:C481                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1094  02:C483                     stx    <psg_tmpptr
+       Undefined symbol in operand field!
+ 1094  02:C485                     sta    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1113  02:C48A                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1115  02:C48D                    sta     psg_transpose,Y
+       Undefined symbol in operand field!
+ 1122  02:C493                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1124  02:C496                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+ 1125  02:C49A                     adc    psg_transpose,X
+       Undefined symbol in operand field!
+ 1126  02:C49D                    sta     psg_transpose,X
+       Undefined symbol in operand field!
+ 1163  02:C4A8                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1168  02:C4AF                    sta     psg_fadespeed
+       Undefined symbol in operand field!
+ 1169  02:C4B2                    stz     psg_fadecount
+       Undefined symbol in operand field!
+ 1170  02:C4B5                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+ 1178  02:C4BB                    sta     psg_voicectrl
+       Undefined symbol in operand field!
+# 206 error(s)
+HuC (v3.21, 2005/04/09, Denki release)
+; ERROR: psglib.c(7)
+;#include "sndDefs.h"
+;          ^
+;******  too many nested includes  ******
+
+Error(s)
+HuC (v3.21, 2005/04/09, Denki release)
+
+No errors
+PC Engine Assembler (v3.21, 2005/04/09, Denki Release)
+
+pass 1
+pass 2
+#[2]   startup.asm
+ 1243  00:E30B                    tma   #page(psgMainDrive)               ; map out whatever is in 'our' code segment
+       Undefined symbol in operand field!
+ 1243  00:E30B                    tma   #page(psgMainDrive)               ; map out whatever is in 'our' code segment
+       Incorrect page index!
+ 1245  00:E30C                    lda   #bank(psgMainDrive)               ; load 'our' page number
+       No BANK index for this symbol!
+ 1245  00:E30C                    lda   #bank(psgMainDrive)               ; load 'our' page number
+       Undefined symbol in operand field!
+ 1246  00:E310                    tam   #page(psgMainDrive)               ; and map it into memory
+       Undefined symbol in operand field!
+ 1246  00:E310                    tam   #page(psgMainDrive)               ; and map it into memory
+       Incorrect page index!
+ 1280  00:E32A                    jsr             psgMainDrive            ; do main tracks
+       Undefined symbol in operand field!
+ 1295  00:E343                    jsr     psgSubDrive                     ; handle sub track
+       Undefined symbol in operand field!
+ 1336  00:E36F                    tam   #page(psgMainDrive)       ; restore code bank
+       Undefined symbol in operand field!
+ 1336  00:E36F                    tam   #page(psgMainDrive)       ; restore code bank
+       Incorrect page index!
+#[3]   sound.asm
+  115  02:C017                    stz     psg_tempo       ; clear header info
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  122  02:C023                    stz     <psg_tmpptr
+       Undefined symbol in operand field!
+  123  02:C025                    stz     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  124  02:C027                    stz     <psg_tmpptr1
+       Undefined symbol in operand field!
+  125  02:C029                    stz     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  134  02:C031            .loop1: stx     psg_ch_value    ; $0800 register value
+       Undefined symbol in operand field!
+  153  02:C056                    sta     psg_song
+       Undefined symbol in operand field!
+  155  02:C059                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  156  02:C05B                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  170  02:C068                     stx    psg_bank1
+       Undefined symbol in operand field!
+  170  02:C06B                     sta    psg_bank1+1
+       Undefined symbol in operand field!
+  180  02:C073                     stx    psg_trkhdr
+       Undefined symbol in operand field!
+  180  02:C076                     sta    psg_trkhdr+1
+       Undefined symbol in operand field!
+  190  02:C07E                     stx    psg_wavehdr
+       Undefined symbol in operand field!
+  190  02:C081                     sta    psg_wavehdr+1
+       Undefined symbol in operand field!
+  200  02:C089                     stx    psg_envhdr
+       Undefined symbol in operand field!
+  200  02:C08C                     sta    psg_envhdr+1
+       Undefined symbol in operand field!
+  210  02:C094                     stx    psg_fmhdr
+       Undefined symbol in operand field!
+  210  02:C097                     sta    psg_fmhdr+1
+       Undefined symbol in operand field!
+  220  02:C09F                     stx    psg_pehdr
+       Undefined symbol in operand field!
+  220  02:C0A2                     sta    psg_pehdr+1
+       Undefined symbol in operand field!
+  230  02:C0AA                     stx    psg_percusshdr
+       Undefined symbol in operand field!
+  230  02:C0AD                     sta    psg_percusshdr+1
+       Undefined symbol in operand field!
+  246  02:C0BD                    sta     psg_tempo
+       Undefined symbol in operand field!
+  258  02:C0C3                    sta     psg_song
+       Undefined symbol in operand field!
+  273  02:C0CC            .loop:  ldx     psg_voicectrl,Y
+       Undefined symbol in operand field!
+  295  02:C0DE            .loop:  ldx     psg_voicectrl+6,Y
+       Undefined symbol in operand field!
+  317  02:C0F1                    lda     #PSG_MAINPAUSE  ; set pause on MAIN track
+       Undefined symbol in operand field!
+  318  02:C0F3                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  326  02:C0FA            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  334  02:C105                    stz     psg_voicectrl,X
+       Undefined symbol in operand field!
+  336  02:C108            .pause: lda     psg_voicectrl+6,X       ; check subtrack
+       Undefined symbol in operand field!
+  340  02:C10F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  374  02:C12F                    lda     #PSG_SUBPAUSE   ; set pause on SUB track
+       Undefined symbol in operand field!
+  375  02:C131                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  383  02:C138            .loop:  lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  391  02:C143                    stz     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  395  02:C14A                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  398  02:C14D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  401  02:C152                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  403  02:C157                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  406  02:C15A                    lda     psg_trkctrl     ; is anything playing on main track ?
+       Undefined symbol in operand field!
+  409  02:C15F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  442  02:C17D                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  443  02:C17F                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  446  02:C184            .loop:  stz     psg_voicectrl,X         ; disable main track
+       Undefined symbol in operand field!
+  447  02:C187                    stz     psg_voicectrl+6,X       ; disable sub track
+       Undefined symbol in operand field!
+  468  02:C19A                    ldy     psg_voicectrl,X
+       Undefined symbol in operand field!
+  473  02:C1A2                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  476  02:C1A6                    ldy     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  480  02:C1AD                    stx     psg_ch_value    ; turn off voice
+       Undefined symbol in operand field!
+  508  02:C1C4            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  512  02:C1CB                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  517  02:C1D1                    lda     #PSG_MAINPAUSE          ; release pause on main tracks
+       Undefined symbol in operand field!
+  518  02:C1D3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  524  02:C1DC            .loop1: lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  528  02:C1E3                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  530  02:C1E6                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  532  02:C1EB                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  537  02:C1F1                    lda     #PSG_SUBPAUSE           ; release pause on sub tracks
+       Undefined symbol in operand field!
+  538  02:C1F3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  556  02:C200                    sta     psg_fadespeed   ; store it as fade speed
+       Undefined symbol in operand field!
+  557  02:C203                    stz     psg_fadecount   ; reset fade levels
+       Undefined symbol in operand field!
+  558  02:C206                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  582  02:C20B                    lda     psg_song
+       Undefined symbol in operand field!
+  589  02:C215                    sta     psg_currvoice
+       Undefined symbol in operand field!
+  591  02:C218            .loop:  ldx     psg_currvoice
+       Undefined symbol in operand field!
+  596  02:C21F                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  597  02:C222                    and     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  602  02:C228                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  606  02:C22D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  611  02:C235            .next:  dec     psg_currvoice
+       Undefined symbol in operand field!
+  624  02:C247                    lda     #PSG_MAINPAUSE
+       Undefined symbol in operand field!
+  625  02:C249                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  632  02:C253                    lda     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  633  02:C255                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  646  02:C259                    lda     psg_song
+       Undefined symbol in operand field!
+  651  02:C25E                     ldx    psg_trkhdr
+       Undefined symbol in operand field!
+  651  02:C261                     lda    psg_trkhdr+1
+       Undefined symbol in operand field!
+  653  02:C264                     stx    <psg_tmpptr1
+       Undefined symbol in operand field!
+  653  02:C266                     sta    <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  654  02:C268                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  655  02:C26A                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  657  02:C26D                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  658  02:C26F                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  660  02:C271                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  661  02:C273                    sta     <psg_tmpptr1
+       Undefined symbol in operand field!
+  662  02:C275                    sta     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  672  02:C27F                    lsr     psg_tmpptr1+1
+       Undefined symbol in operand field!
+  676  02:C289                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  677  02:C28C                    sta     psg_cntdown,X
+       Undefined symbol in operand field!
+  678  02:C28F                    stz     psg_strikephase,X
+       Undefined symbol in operand field!
+  679  02:C292                    stz     psg_transpose,X
+       Undefined symbol in operand field!
+  680  02:C295                    stz     psg_mode,X
+       Undefined symbol in operand field!
+  681  02:C298                    stz     psg_stkoff,X
+       Undefined symbol in operand field!
+  682  02:C29B                    stz     psg_detune,X
+       Undefined symbol in operand field!
+  683  02:C29E                    stz     psg_duratnmult,X
+       Undefined symbol in operand field!
+  684  02:C2A1                    stz     psg_fmcorrect,X
+       Undefined symbol in operand field!
+  685  02:C2A4                    stz     psg_fmdelay,X
+       Undefined symbol in operand field!
+  686  02:C2A7                    stz     psg_fmdelcntdn,X
+       Undefined symbol in operand field!
+  687  02:C2AA                    stz     psg_pedelay,X
+       Undefined symbol in operand field!
+  688  02:C2AD                    stz     psg_pedelcntdn,X
+       Undefined symbol in operand field!
+  689  02:C2B0                    stz     psg_volchg,X
+       Undefined symbol in operand field!
+  690  02:C2B3                    stz     psg_volchgaccum,X
+       Undefined symbol in operand field!
+  691  02:C2B6                    stz     psg_panpotchg,X
+       Undefined symbol in operand field!
+  692  02:C2B9                    stz     psg_panpotaccum,X
+       Undefined symbol in operand field!
+  695  02:C2BE                    sta     psg_octave,X
+       Undefined symbol in operand field!
+  697  02:C2C3                    sta     psg_keyonratio,X
+       Undefined symbol in operand field!
+  698  02:C2C6                    sta     psg_keycntdown,X
+       Undefined symbol in operand field!
+  700  02:C2CB                    sta     psg_perchvol,X
+       Undefined symbol in operand field!
+  703  02:C2D1                    sta     psg_envptr_l,X
+       Undefined symbol in operand field!
+  705  02:C2D7                    sta     psg_envptr_h,X
+       Undefined symbol in operand field!
+  706  02:C2DA                    stz     psg_envptr_off,X
+       Undefined symbol in operand field!
+  708  02:C2DF                    stz     psg_envrels_l,X
+       Undefined symbol in operand field!
+  709  02:C2E2                    sta     psg_envrels_h,X
+       Undefined symbol in operand field!
+  712  02:C2E6                    lda     [psg_tmpptr],Y  ; put voice address into correct voice
+       Undefined symbol in operand field!
+  713  02:C2E8                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  714  02:C2EB                    sta     psg_savepoint_l,X
+       Undefined symbol in operand field!
+  716  02:C2EF                    lda     [psg_tmpptr],Y
+       Undefined symbol in operand field!
+  717  02:C2F1                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  718  02:C2F4                    sta     psg_savepoint_h,X
+       Undefined symbol in operand field!
+  722  02:C2F8                    lda     <psg_tmpptr1
+       Undefined symbol in operand field!
+  735  02:C30C                    stz     psg_fadespeed
+       Undefined symbol in operand field!
+  736  02:C30F                    stz     psg_fadecount
+       Undefined symbol in operand field!
+  737  02:C312                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  739  02:C315                    lda     psg_song
+       Undefined symbol in operand field!
+  741  02:C31A                    sta     psg_song
+       Undefined symbol in operand field!
+  786  02:C330                    dec     psg_cntdown,X   ; is last note done yet ?
+       Undefined symbol in operand field!
+  790  02:C336            .next:  lda     psg_trkptr_l,X  ; get pointer
+       Undefined symbol in operand field!
+  791  02:C339                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  792  02:C33B                    lda     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  793  02:C33E                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  795  02:C340                    lda     [psg_tmpptr]    ; read next bytecode
+       Undefined symbol in operand field!
+  796  02:C342                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  796  02:C346                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  822  02:C35E                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  823  02:C361                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+  824  02:C363                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  825  02:C366                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  826  02:C368                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  891  02:C3D4                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  891  02:C3D8                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  899  02:C3DB                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  901  02:C3DF                    sta     psg_duratnmult,Y
+       Undefined symbol in operand field!
+  909  02:C3E7                    sta     psg_octave,Y
+       Undefined symbol in operand field!
+  916  02:C3EB                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  917  02:C3EE                    inc     psg_octave,X
+       Undefined symbol in operand field!
+  924  02:C3F2                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  925  02:C3F5                    dec     psg_octave,X
+       Undefined symbol in operand field!
+  933  02:C3FB                    sta     psg_strikephase,Y
+       Undefined symbol in operand field!
+  940  02:C3FF                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  946  02:C40B                    sta     psg_tempo
+       Undefined symbol in operand field!
+  953  02:C411                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  954  02:C413                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  956  02:C417                    sta     psg_volchg,Y
+       Undefined symbol in operand field!
+  957  02:C41A                    sta     psg_volchgaccum,Y
+       Undefined symbol in operand field!
+  964  02:C420                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  965  02:C422                    sta     psg_panpot,Y
+       Undefined symbol in operand field!
+  967  02:C426                    sta     psg_panpotchg,Y
+       Undefined symbol in operand field!
+  968  02:C429                    sta     psg_panpotaccum,Y
+       Undefined symbol in operand field!
+  976  02:C432                     sbc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  977  02:C434                    sta     psg_keyonratio,Y
+       Undefined symbol in operand field!
+  984  02:C43A                    lda     psg_perchvol,Y
+       Undefined symbol in operand field!
+  985  02:C43E                     adc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  987  02:C442                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  994  02:C448                    lda     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+  995  02:C44B                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  996  02:C44D                    lda     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+  997  02:C450                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1004  02:C453                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+ 1005  02:C455                    sta     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+ 1006  02:C458                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1007  02:C45A                    sta     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+ 1026  02:C460                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1027  02:C462                    sta     psg_wavenum,Y
+       Undefined symbol in operand field!
+ 1070  02:C46E                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1071  02:C470                    sta     psg_detune,Y
+       Undefined symbol in operand field!
+ 1090  02:C478                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1092  02:C47B                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+ 1092  02:C47F                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1093  02:C481                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1094  02:C483                     stx    <psg_tmpptr
+       Undefined symbol in operand field!
+ 1094  02:C485                     sta    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1113  02:C48A                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1115  02:C48D                    sta     psg_transpose,Y
+       Undefined symbol in operand field!
+ 1122  02:C493                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1124  02:C496                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+ 1125  02:C49A                     adc    psg_transpose,X
+       Undefined symbol in operand field!
+ 1126  02:C49D                    sta     psg_transpose,X
+       Undefined symbol in operand field!
+ 1163  02:C4A8                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1168  02:C4AF                    sta     psg_fadespeed
+       Undefined symbol in operand field!
+ 1169  02:C4B2                    stz     psg_fadecount
+       Undefined symbol in operand field!
+ 1170  02:C4B5                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+ 1178  02:C4BB                    sta     psg_voicectrl
+       Undefined symbol in operand field!
+# 206 error(s)
+HuC (v3.21, 2005/04/09, Denki release)
+
+No errors
+PC Engine Assembler (v3.21, 2005/04/09, Denki Release)
+
+pass 1
+pass 2
+#[2]   startup.asm
+ 1147  00:E2F0                    lda   psg_bank1         ; map PSG data banks
+       Undefined symbol in operand field!
+ 1149  00:E2F5                    lda   psg_bank2
+       Undefined symbol in operand field!
+ 1154  00:E2FD                    lda   psg_tempo
+       Undefined symbol in operand field!
+ 1159  00:E307                    sta   psg_tempo
+       Undefined symbol in operand field!
+#[3]   sound.asm
+  115  02:C017                    stz     psg_tempo       ; clear header info
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  116  02:C021                    tii     psg_tempo, psg_tempo+1, 19
+       Undefined symbol in operand field!
+  122  02:C023                    stz     <psg_tmpptr
+       Undefined symbol in operand field!
+  123  02:C025                    stz     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  124  02:C027                    stz     <psg_tmpptr1
+       Undefined symbol in operand field!
+  125  02:C029                    stz     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  134  02:C031            .loop1: stx     psg_ch_value    ; $0800 register value
+       Undefined symbol in operand field!
+  153  02:C056                    sta     psg_song
+       Undefined symbol in operand field!
+  155  02:C059                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  156  02:C05B                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  170  02:C068                     stx    psg_bank1
+       Undefined symbol in operand field!
+  170  02:C06B                     sta    psg_bank1+1
+       Undefined symbol in operand field!
+  180  02:C073                     stx    psg_trkhdr
+       Undefined symbol in operand field!
+  180  02:C076                     sta    psg_trkhdr+1
+       Undefined symbol in operand field!
+  190  02:C07E                     stx    psg_wavehdr
+       Undefined symbol in operand field!
+  190  02:C081                     sta    psg_wavehdr+1
+       Undefined symbol in operand field!
+  200  02:C089                     stx    psg_envhdr
+       Undefined symbol in operand field!
+  200  02:C08C                     sta    psg_envhdr+1
+       Undefined symbol in operand field!
+  210  02:C094                     stx    psg_fmhdr
+       Undefined symbol in operand field!
+  210  02:C097                     sta    psg_fmhdr+1
+       Undefined symbol in operand field!
+  220  02:C09F                     stx    psg_pehdr
+       Undefined symbol in operand field!
+  220  02:C0A2                     sta    psg_pehdr+1
+       Undefined symbol in operand field!
+  230  02:C0AA                     stx    psg_percusshdr
+       Undefined symbol in operand field!
+  230  02:C0AD                     sta    psg_percusshdr+1
+       Undefined symbol in operand field!
+  246  02:C0BD                    sta     psg_tempo
+       Undefined symbol in operand field!
+  258  02:C0C3                    sta     psg_song
+       Undefined symbol in operand field!
+  273  02:C0CC            .loop:  ldx     psg_voicectrl,Y
+       Undefined symbol in operand field!
+  295  02:C0DE            .loop:  ldx     psg_voicectrl+6,Y
+       Undefined symbol in operand field!
+  317  02:C0F1                    lda     #PSG_MAINPAUSE  ; set pause on MAIN track
+       Undefined symbol in operand field!
+  318  02:C0F3                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  326  02:C0FA            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  334  02:C105                    stz     psg_voicectrl,X
+       Undefined symbol in operand field!
+  336  02:C108            .pause: lda     psg_voicectrl+6,X       ; check subtrack
+       Undefined symbol in operand field!
+  340  02:C10F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  374  02:C12F                    lda     #PSG_SUBPAUSE   ; set pause on SUB track
+       Undefined symbol in operand field!
+  375  02:C131                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  383  02:C138            .loop:  lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  391  02:C143                    stz     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  395  02:C14A                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  398  02:C14D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  401  02:C152                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  403  02:C157                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  406  02:C15A                    lda     psg_trkctrl     ; is anything playing on main track ?
+       Undefined symbol in operand field!
+  409  02:C15F                    stx     psg_ch_value
+       Undefined symbol in operand field!
+  442  02:C17D                    lda     #(PSG_MAINPAUSE | PSG_SUBPAUSE)
+       Undefined symbol in operand field!
+  443  02:C17F                    sta     psg_trkctrl
+       Undefined symbol in operand field!
+  446  02:C184            .loop:  stz     psg_voicectrl,X         ; disable main track
+       Undefined symbol in operand field!
+  447  02:C187                    stz     psg_voicectrl+6,X       ; disable sub track
+       Undefined symbol in operand field!
+  468  02:C19A                    ldy     psg_voicectrl,X
+       Undefined symbol in operand field!
+  473  02:C1A2                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  476  02:C1A6                    ldy     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  480  02:C1AD                    stx     psg_ch_value    ; turn off voice
+       Undefined symbol in operand field!
+  508  02:C1C4            .loop:  lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  512  02:C1CB                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  517  02:C1D1                    lda     #PSG_MAINPAUSE          ; release pause on main tracks
+       Undefined symbol in operand field!
+  518  02:C1D3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  524  02:C1DC            .loop1: lda     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  528  02:C1E3                    sta     psg_voicectrl+6,X
+       Undefined symbol in operand field!
+  530  02:C1E6                    lda     psg_wavenum,X
+       Undefined symbol in operand field!
+  532  02:C1EB                    sta     psg_wavenum,X
+       Undefined symbol in operand field!
+  537  02:C1F1                    lda     #PSG_SUBPAUSE           ; release pause on sub tracks
+       Undefined symbol in operand field!
+  538  02:C1F3                    trb     psg_trkctrl
+       Undefined symbol in operand field!
+  556  02:C200                    sta     psg_fadespeed   ; store it as fade speed
+       Undefined symbol in operand field!
+  557  02:C203                    stz     psg_fadecount   ; reset fade levels
+       Undefined symbol in operand field!
+  558  02:C206                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  582  02:C20B                    lda     psg_song
+       Undefined symbol in operand field!
+  589  02:C215                    sta     psg_currvoice
+       Undefined symbol in operand field!
+  591  02:C218            .loop:  ldx     psg_currvoice
+       Undefined symbol in operand field!
+  596  02:C21F                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  597  02:C222                    and     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  602  02:C228                    lda     psg_trkctrl
+       Undefined symbol in operand field!
+  606  02:C22D                    lda     psg_voicectrl,X
+       Undefined symbol in operand field!
+  611  02:C235            .next:  dec     psg_currvoice
+       Undefined symbol in operand field!
+  624  02:C247                    lda     #PSG_MAINPAUSE
+       Undefined symbol in operand field!
+  625  02:C249                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  632  02:C253                    lda     #PSG_SUBPAUSE
+       Undefined symbol in operand field!
+  633  02:C255                    tsb     psg_trkctrl
+       Undefined symbol in operand field!
+  646  02:C259                    lda     psg_song
+       Undefined symbol in operand field!
+  651  02:C25E                     ldx    psg_trkhdr
+       Undefined symbol in operand field!
+  651  02:C261                     lda    psg_trkhdr+1
+       Undefined symbol in operand field!
+  653  02:C264                     stx    <psg_tmpptr1
+       Undefined symbol in operand field!
+  653  02:C266                     sta    <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  654  02:C268                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  655  02:C26A                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  657  02:C26D                    lda     [psg_tmpptr1],Y
+       Undefined symbol in operand field!
+  658  02:C26F                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  660  02:C271                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  661  02:C273                    sta     <psg_tmpptr1
+       Undefined symbol in operand field!
+  662  02:C275                    sta     <psg_tmpptr1+1
+       Undefined symbol in operand field!
+  672  02:C27F                    lsr     psg_tmpptr1+1
+       Undefined symbol in operand field!
+  676  02:C289                    sta     psg_voicectrl,X
+       Undefined symbol in operand field!
+  677  02:C28C                    sta     psg_cntdown,X
+       Undefined symbol in operand field!
+  678  02:C28F                    stz     psg_strikephase,X
+       Undefined symbol in operand field!
+  679  02:C292                    stz     psg_transpose,X
+       Undefined symbol in operand field!
+  680  02:C295                    stz     psg_mode,X
+       Undefined symbol in operand field!
+  681  02:C298                    stz     psg_stkoff,X
+       Undefined symbol in operand field!
+  682  02:C29B                    stz     psg_detune,X
+       Undefined symbol in operand field!
+  683  02:C29E                    stz     psg_duratnmult,X
+       Undefined symbol in operand field!
+  684  02:C2A1                    stz     psg_fmcorrect,X
+       Undefined symbol in operand field!
+  685  02:C2A4                    stz     psg_fmdelay,X
+       Undefined symbol in operand field!
+  686  02:C2A7                    stz     psg_fmdelcntdn,X
+       Undefined symbol in operand field!
+  687  02:C2AA                    stz     psg_pedelay,X
+       Undefined symbol in operand field!
+  688  02:C2AD                    stz     psg_pedelcntdn,X
+       Undefined symbol in operand field!
+  689  02:C2B0                    stz     psg_volchg,X
+       Undefined symbol in operand field!
+  690  02:C2B3                    stz     psg_volchgaccum,X
+       Undefined symbol in operand field!
+  691  02:C2B6                    stz     psg_panpotchg,X
+       Undefined symbol in operand field!
+  692  02:C2B9                    stz     psg_panpotaccum,X
+       Undefined symbol in operand field!
+  695  02:C2BE                    sta     psg_octave,X
+       Undefined symbol in operand field!
+  697  02:C2C3                    sta     psg_keyonratio,X
+       Undefined symbol in operand field!
+  698  02:C2C6                    sta     psg_keycntdown,X
+       Undefined symbol in operand field!
+  700  02:C2CB                    sta     psg_perchvol,X
+       Undefined symbol in operand field!
+  703  02:C2D1                    sta     psg_envptr_l,X
+       Undefined symbol in operand field!
+  705  02:C2D7                    sta     psg_envptr_h,X
+       Undefined symbol in operand field!
+  706  02:C2DA                    stz     psg_envptr_off,X
+       Undefined symbol in operand field!
+  708  02:C2DF                    stz     psg_envrels_l,X
+       Undefined symbol in operand field!
+  709  02:C2E2                    sta     psg_envrels_h,X
+       Undefined symbol in operand field!
+  712  02:C2E6                    lda     [psg_tmpptr],Y  ; put voice address into correct voice
+       Undefined symbol in operand field!
+  713  02:C2E8                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  714  02:C2EB                    sta     psg_savepoint_l,X
+       Undefined symbol in operand field!
+  716  02:C2EF                    lda     [psg_tmpptr],Y
+       Undefined symbol in operand field!
+  717  02:C2F1                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  718  02:C2F4                    sta     psg_savepoint_h,X
+       Undefined symbol in operand field!
+  722  02:C2F8                    lda     <psg_tmpptr1
+       Undefined symbol in operand field!
+  735  02:C30C                    stz     psg_fadespeed
+       Undefined symbol in operand field!
+  736  02:C30F                    stz     psg_fadecount
+       Undefined symbol in operand field!
+  737  02:C312                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+  739  02:C315                    lda     psg_song
+       Undefined symbol in operand field!
+  741  02:C31A                    sta     psg_song
+       Undefined symbol in operand field!
+  786  02:C330                    dec     psg_cntdown,X   ; is last note done yet ?
+       Undefined symbol in operand field!
+  790  02:C336            .next:  lda     psg_trkptr_l,X  ; get pointer
+       Undefined symbol in operand field!
+  791  02:C339                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  792  02:C33B                    lda     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  793  02:C33E                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  795  02:C340                    lda     [psg_tmpptr]    ; read next bytecode
+       Undefined symbol in operand field!
+  796  02:C342                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  796  02:C346                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  822  02:C35E                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  823  02:C361                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+  824  02:C363                    sta     psg_trkptr_l,X
+       Undefined symbol in operand field!
+  825  02:C366                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+  826  02:C368                    sta     psg_trkptr_h,X
+       Undefined symbol in operand field!
+  891  02:C3D4                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+  891  02:C3D8                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+  899  02:C3DB                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  901  02:C3DF                    sta     psg_duratnmult,Y
+       Undefined symbol in operand field!
+  909  02:C3E7                    sta     psg_octave,Y
+       Undefined symbol in operand field!
+  916  02:C3EB                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  917  02:C3EE                    inc     psg_octave,X
+       Undefined symbol in operand field!
+  924  02:C3F2                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+  925  02:C3F5                    dec     psg_octave,X
+       Undefined symbol in operand field!
+  933  02:C3FB                    sta     psg_strikephase,Y
+       Undefined symbol in operand field!
+  940  02:C3FF                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  946  02:C40B                    sta     psg_tempo
+       Undefined symbol in operand field!
+  953  02:C411                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  954  02:C413                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  956  02:C417                    sta     psg_volchg,Y
+       Undefined symbol in operand field!
+  957  02:C41A                    sta     psg_volchgaccum,Y
+       Undefined symbol in operand field!
+  964  02:C420                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+  965  02:C422                    sta     psg_panpot,Y
+       Undefined symbol in operand field!
+  967  02:C426                    sta     psg_panpotchg,Y
+       Undefined symbol in operand field!
+  968  02:C429                    sta     psg_panpotaccum,Y
+       Undefined symbol in operand field!
+  976  02:C432                     sbc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  977  02:C434                    sta     psg_keyonratio,Y
+       Undefined symbol in operand field!
+  984  02:C43A                    lda     psg_perchvol,Y
+       Undefined symbol in operand field!
+  985  02:C43E                     adc    [psg_tmpptr]
+       Undefined symbol in operand field!
+  987  02:C442                    sta     psg_perchvol,Y
+       Undefined symbol in operand field!
+  994  02:C448                    lda     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+  995  02:C44B                    sta     <psg_tmpptr
+       Undefined symbol in operand field!
+  996  02:C44D                    lda     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+  997  02:C450                    sta     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1004  02:C453                    lda     <psg_tmpptr
+       Undefined symbol in operand field!
+ 1005  02:C455                    sta     psg_savepoint_l,Y
+       Undefined symbol in operand field!
+ 1006  02:C458                    lda     <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1007  02:C45A                    sta     psg_savepoint_h,Y
+       Undefined symbol in operand field!
+ 1026  02:C460                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1027  02:C462                    sta     psg_wavenum,Y
+       Undefined symbol in operand field!
+ 1070  02:C46E                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1071  02:C470                    sta     psg_detune,Y
+       Undefined symbol in operand field!
+ 1090  02:C478                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1092  02:C47B                     inc    <psg_tmpptr              ; value at stated memory
+       Undefined symbol in operand field!
+ 1092  02:C47F                     inc    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1093  02:C481                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1094  02:C483                     stx    <psg_tmpptr
+       Undefined symbol in operand field!
+ 1094  02:C485                     sta    <psg_tmpptr+1
+       Undefined symbol in operand field!
+ 1113  02:C48A                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1115  02:C48D                    sta     psg_transpose,Y
+       Undefined symbol in operand field!
+ 1122  02:C493                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1124  02:C496                    ldx     psg_currvoice
+       Undefined symbol in operand field!
+ 1125  02:C49A                     adc    psg_transpose,X
+       Undefined symbol in operand field!
+ 1126  02:C49D                    sta     psg_transpose,X
+       Undefined symbol in operand field!
+ 1163  02:C4A8                    lda     [psg_tmpptr]
+       Undefined symbol in operand field!
+ 1168  02:C4AF                    sta     psg_fadespeed
+       Undefined symbol in operand field!
+ 1169  02:C4B2                    stz     psg_fadecount
+       Undefined symbol in operand field!
+ 1170  02:C4B5                    stz     psg_fadevolcut
+       Undefined symbol in operand field!
+ 1178  02:C4BB                    sta     psg_voicectrl
+       Undefined symbol in operand field!
+#[1]   main.s
+ 1365  06:B93B                      call  _psgOff
+       Undefined destination!
+# 201 error(s)
