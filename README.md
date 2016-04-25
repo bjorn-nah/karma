@@ -23,7 +23,7 @@ Credits:
 	- Florian Dufour
 	- Bjorn
 - SOUND
-	- MrKaos
+	- MrKaox
 	- Bjorn
 - CODE
 	- Bjorn
