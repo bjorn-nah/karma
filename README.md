@@ -1,5 +1,5 @@
 # Tales of the Unemployed
-Tales of the Unemployed - game for Nintendo Pc Engine - Entry for Global Game Jam 2016
+Tales of the Unemployed - game for Pc Engine - Entry for Global Game Jam 2016
 
 An emulator or a flashcard is required to play.
 Tested on:
